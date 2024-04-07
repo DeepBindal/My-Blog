@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { Button } from "./ui/button";
+import { useOrganization } from "@clerk/nextjs";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -14,11 +14,11 @@ import {
 } from "./ui/form";
 import { Textarea } from "./ui/textarea";
 import { usePathname, useRouter } from "next/navigation";
-
-import { updateUser } from "@/lib/actions/user.actions";
 import { BlogValidation } from "@/lib/validations/blog";
 import { createBlog } from "@/lib/actions/blog.actions";
 function PostBlog({ userId }) {
+  const { organization } = useOrganization();
+  console.log(organization);
   const pathname = usePathname();
   const router = useRouter();
   const form = useForm({
@@ -33,10 +33,10 @@ function PostBlog({ userId }) {
     await createBlog({
       text: values.blog,
       author: userId,
-      communityId: null,
+      communityId: organization ? organization.id : null,
       path: pathname,
     });
-    router.push("/")
+    router.push("/");
   };
   return (
     <Form {...form}>
