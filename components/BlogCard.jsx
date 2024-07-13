@@ -6,6 +6,7 @@ function BlogCard({
   id,
   currUserId,
   parentId,
+  title,
   content,
   author,
   community,
@@ -29,12 +30,17 @@ function BlogCard({
             <div className="blog-card_bar" />
           </div>
           <div>
+          <Link href={`/blog/${id}`}>
+            <h4 className="head-text">
+                {title}
+              </h4>
+              </Link>
             <Link href={`/profile/${author.id}`} className="relative h-11 w-11">
               <h4 className="cursor-pointer text-base-semibold text-light-1">
-                {author.name}
+                By: {author.name}
               </h4>
             </Link>
-            <p className="mt-2 text-small-regular text-light-2">{content}</p>
+            <p className="mt-2 text-medium-regular text-light-2">{content}</p>
             <div className={`${isComment && 'mb-10'} mt-5 flex flex-col gap-3`}>
                 <div className="flex gap-3 5">
                     <Image src="/assets/heart-gray.svg" alt="heart" width={24} height={24} className="cursor-pointer object-contain"/>
@@ -54,6 +60,7 @@ function BlogCard({
             </div>
           </div>
         </div>
+      </div>
         {!isComment && community && (
           
         <Link
@@ -61,7 +68,7 @@ function BlogCard({
           className='mt-5 flex items-center'
         >
           <p className='text-subtle-medium text-gray-1'>
-            {formatDateString(createdAt)}
+            {formatDateString(createdAt)}{" "}
             {community && ` - ${community.name} Community`}
           </p>
 
@@ -74,7 +81,6 @@ function BlogCard({
           />
         </Link>
       )}
-      </div>
     </article>
   );
 }

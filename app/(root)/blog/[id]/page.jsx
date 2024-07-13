@@ -22,6 +22,7 @@ async function page({ params }) {
 
   return (
     <section className='relative'>
+      <h1 className="head-text mb-4">{blog.title}</h1>
       <div>
         <BlogCard
           id={blog._id}

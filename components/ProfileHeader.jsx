@@ -8,7 +8,7 @@ function ProfileHeader({
   username,
   imgUrl,
   bio,
-//   type,
+  type,
 }) {
   return (
     <div className="flex w-full flex-col justify-start">

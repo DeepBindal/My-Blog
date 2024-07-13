@@ -20,6 +20,7 @@ export default async function Home() {
                 id={post._id}
                 currUserId={user?.id || ""}
                 parentId={post.parentId}
+                title={post.title}
                 content={post.text}
                 author={post.author}
                 community={post.community}
