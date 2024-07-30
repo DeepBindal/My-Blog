@@ -4,12 +4,13 @@ import BlogCard from "@/components/BlogCard";
 export default async function Home() {
   const result = await fetchPosts(1, 30);
   const user = await currentUser();
+  // console.log(user)
   return (
     <>
-      <h1 className="head-text text-center">Blog</h1>
+      <h1 className="head-text text-center">Spheres</h1>
       <section className="mt-9 flex flex-col gap-10">
         {result.posts.length === 0 ? (
-          <p>No Blogs found</p>
+          <p>No Spheres found</p>
         ) : (
           <>
             {result.posts.map((post) => (
