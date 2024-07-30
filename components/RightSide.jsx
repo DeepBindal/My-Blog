@@ -32,6 +32,7 @@ async function RightSidebar() {
                   id={community.id}
                   name={community.name}
                   username={community.username}
+                  isCommunity={true}
                   imgUrl={community.image}
                   personType='Community'
                 />
