@@ -18,7 +18,7 @@ import { BlogValidation } from "@/lib/validations/blog";
 import { createBlog } from "@/lib/actions/blog.actions";
 import { Input } from "./ui/input";
 function PostBlog({ userId }) {
-  const { organization } = useOrganization();
+  const  {organization}  = useOrganization();
   const pathname = usePathname();
   const router = useRouter();
   const form = useForm({

@@ -59,10 +59,10 @@ const page = async ({ params }) => {
           </TabsContent>
           <TabsContent value='members' className='mt-9 w-full text-light-1'>
             <section className='mt-9 flex flex-col gap-10'>
-              {communityDetails.members.map((member) => (
+              {communityDetails?.members.map((member) => (
                 <UserCard
-                  key={member.id}
-                  id={member.id}
+                  key={member.id.toString()}
+                  id={member.id.toString()}
                   name={member.name}
                   username={member.username}
                   imgUrl={member.image}
@@ -73,7 +73,6 @@ const page = async ({ params }) => {
           </TabsContent>
 
           <TabsContent value='requests' className='w-full text-light-1'>
-            {/* @ts-ignore */}
             <BlogsTab
               currentUserId={user.id}
               accountId={communityDetails._id}

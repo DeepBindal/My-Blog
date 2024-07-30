@@ -1,6 +1,4 @@
 import { fetchPosts } from "@/lib/actions/blog.actions";
-import { UserButton } from "@clerk/nextjs";
-import Image from "next/image";
 import { currentUser } from "@clerk/nextjs";
 import BlogCard from "@/components/BlogCard";
 export default async function Home() {

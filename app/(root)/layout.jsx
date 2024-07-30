@@ -12,8 +12,8 @@ import Navbar from "@/components/Navbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Threads",
-  description: "A Next.js 13 Meta Threads application",
+  title: "SciSphere",
+  description: "A Next.js 13 Meta scientific blog application",
 };
 
 export default function RootLayout({ children }) {

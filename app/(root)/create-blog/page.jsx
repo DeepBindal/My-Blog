@@ -15,7 +15,7 @@ async function Page() {
   return (
     <>
       <h1 className="head-text">Create Blog</h1>
-      <PostBlog userId={(userInfo._id)} />
+      <PostBlog userId={(userInfo._id.toString())} />
     </>
   );
 }
