@@ -1,7 +1,7 @@
 "use client";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "./ui/button";
 import { useOrganization } from "@clerk/nextjs";
 import {
@@ -19,6 +19,7 @@ import { createBlog } from "@/lib/actions/blog.actions";
 import { Input } from "./ui/input";
 function PostBlog({ userId }) {
   const  {organization}  = useOrganization();
+  const [loading, setLoading] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
   const form = useForm({
@@ -31,6 +32,7 @@ function PostBlog({ userId }) {
   });
 
   const onSubmit = async (values) => {
+    setLoading(true)
     await createBlog({
       title: values.title,
       text: values.blog,
@@ -38,6 +40,7 @@ function PostBlog({ userId }) {
       communityId: organization ? organization.id : null,
       path: pathname,
     });
+    setLoading(false)
     router.push("/");
   };
   return (
@@ -80,7 +83,7 @@ function PostBlog({ userId }) {
             </FormItem>
           )}
         />
-        <Button type="submit" className="bg-primary-500">
+        <Button type="submit" disabled={loading} className="bg-primary-500">
           Post Blog
         </Button>
       </form>

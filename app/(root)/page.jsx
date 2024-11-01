@@ -1,8 +1,9 @@
 import { fetchPosts } from "@/lib/actions/blog.actions";
-import { currentUser } from "@clerk/nextjs";
+import { currentUser } from '@clerk/nextjs/server';
 import BlogCard from "@/components/BlogCard";
 export default async function Home() {
   const result = await fetchPosts(1, 30);
+  const blogs = JSON.parse(JSON.stringify(result.posts));
   const user = await currentUser();
   // console.log(user)
   return (
@@ -13,7 +14,7 @@ export default async function Home() {
           <p>No Spheres found</p>
         ) : (
           <>
-            {result.posts.map((post) => (
+            {blogs.map((post) => (
               <BlogCard
                 key={post._id}
                 id={post._id}

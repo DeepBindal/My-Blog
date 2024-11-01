@@ -8,12 +8,16 @@ import Footer from "@/components/Footer";
 import LeftSide from "@/components/LeftSide";
 import RightSide from "@/components/RightSide";
 import Navbar from "@/components/Navbar";
+import { icons } from "lucide-react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "SciSphere",
   description: "A Next.js 13 Meta scientific blog application",
+  icons:{
+    icon: "/logo.svg"
+  }
 };
 
 export default function RootLayout({ children }) {

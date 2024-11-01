@@ -1,7 +1,9 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { formatDateString } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
 function BlogCard({
   id,
@@ -13,10 +15,19 @@ function BlogCard({
   community,
   createdAt,
   comments,
-  isComment
+  isComment,
 }) {
+  const pathname = usePathname();
+  const truncateContent = (text) => {
+    if (text.length > 100) return text.substring(0, 100) + "...";
+    return text;
+  };
   return (
-    <article className={`flex w-full flex-col rounded-2xl ${isComment ? 'px-0 xs:px-7' : 'bg-dark-2 p-7'} shadow-lg`}>
+    <article
+      className={`flex w-full flex-col rounded-2xl ${
+        isComment ? "px-0 xs:px-7" : "bg-dark-2 p-7"
+      } shadow-lg`}
+    >
       <div className="flex items-start justify-between">
         <div className="flex w-full flex-1 flex-row gap-4">
           <div className="flex flex-col items-center">
@@ -41,15 +52,43 @@ function BlogCard({
                 By: {author.name}
               </h5>
             </Link>
-            <p className="mt-2 text-sm text-light-2">{content}</p>
-            <div className={`${isComment ? 'mb-10' : ''} mt-5 flex flex-col gap-3`}>
+            <p className="mt-2 text-sm text-light-2">
+              {pathname === "/" ? truncateContent(content) : content}
+            </p>
+            <div
+              className={`${isComment ? "mb-10" : ""} mt-5 flex flex-col gap-3`}
+            >
               <div className="flex gap-3">
-                <Image src="/assets/heart-gray.svg" alt="heart" width={24} height={24} className="cursor-pointer object-contain" />
+                <Image
+                  src="/assets/heart-gray.svg"
+                  alt="heart"
+                  width={24}
+                  height={24}
+                  className="cursor-pointer object-contain"
+                />
                 <Link href={`/blog/${id}`}>
-                  <Image src="/assets/reply.svg" alt="reply" width={24} height={24} className="cursor-pointer object-contain" />
+                  <Image
+                    src="/assets/reply.svg"
+                    alt="reply"
+                    width={24}
+                    height={24}
+                    className="cursor-pointer object-contain"
+                  />
                 </Link>
-                <Image src="/assets/share.svg" alt="share" width={24} height={24} className="cursor-pointer object-contain" />
-                <Image src="/assets/repost.svg" alt="repost" width={24} height={24} className="cursor-pointer object-contain" />
+                <Image
+                  src="/assets/share.svg"
+                  alt="share"
+                  width={24}
+                  height={24}
+                  className="cursor-pointer object-contain"
+                />
+                <Image
+                  src="/assets/repost.svg"
+                  alt="repost"
+                  width={24}
+                  height={24}
+                  className="cursor-pointer object-contain"
+                />
               </div>
               {comments?.length > 0 && (
                 <Link href={`/blog/${id}`}>
@@ -63,9 +102,12 @@ function BlogCard({
         </div>
       </div>
       {!isComment && community && (
-        <Link href={`/communities/${community.id}`} className="mt-5 flex items-center">
-          <p className="text-sm text-gray-400">
-            {formatDateString(createdAt)}{" "}
+        <Link
+          href={`/communities/${community.id}`}
+          className="mt-5 flex items-center"
+        >
+          <p className="text-sm text-gray-400" suppressHydrationWarning >
+            {formatDateString(createdAt)}
             {community && ` - ${community.name} Community`}
           </p>
           <Image

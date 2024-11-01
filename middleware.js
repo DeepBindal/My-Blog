@@ -1,17 +1,15 @@
-// Resource: https://clerk.com/docs/nextjs/middleware#auth-middleware
-// Copy the middleware code as it is from the above resource
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-import { authMiddleware } from "@clerk/nextjs";
+// Update to exclude the homepage from the protected routes
+const isProtectedRoute = createRouteMatcher(['/create-blog(.*)', '/blog/(.*)', '/communities/(.*)','/profile/(.*)', '/activity', '/search']);
 
-export default authMiddleware({
-  // An array of public routes that don't require authentication.
-  publicRoutes: ["/api/webhook/clerk", "/api/uploadthing"],
-
-  // An array of routes to be ignored by the authentication middleware.
-  ignoredRoutes: ["/api/webhook/clerk", "/api/uploadthing"],
+export default clerkMiddleware((auth, req) => {
+  if (isProtectedRoute(req)) auth().protect();
 });
 
 export const config = {
-  matcher: ["/((?!.*\\..*|_next).*)", "/", ],
+  matcher: [
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    '/(api|trpc)(.*)'
+  ],
 };
-

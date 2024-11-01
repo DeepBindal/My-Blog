@@ -1,5 +1,5 @@
 import React from 'react'
-import { currentUser } from '@clerk/nextjs'
+import { currentUser } from '@clerk/nextjs/server';
 import AccountProfile from '@/components/AccountProfile'
 import { fetchUser } from '@/lib/actions/user.actions';
 import { redirect } from "next/navigation";

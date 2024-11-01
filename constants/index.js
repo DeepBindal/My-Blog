@@ -16,8 +16,8 @@ export const sidebarLinks = [
     },
     {
       imgURL: "/assets/create.svg",
-      route: "/create-blog",
-      label: "Create Blog",
+      route: "/create-sphere",
+      label: "Create Sphere",
     },
     {
       imgURL: "/assets/community.svg",

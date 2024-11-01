@@ -1,5 +1,5 @@
 import React from "react";
-import { currentUser } from "@clerk/nextjs";
+import { currentUser } from '@clerk/nextjs/server';
 import { fetchUser } from "@/lib/actions/user.actions";
 import { redirect } from "next/navigation";
 import PostBlog from "@/components/PostBlog";
@@ -14,7 +14,7 @@ async function Page() {
   if (!userInfo?.onboarded) redirect("/onboarding");
   return (
     <>
-      <h1 className="head-text">Create Blog</h1>
+      <h1 className="head-text">Create Sphere</h1>
       <PostBlog userId={(userInfo._id.toString())} />
     </>
   );

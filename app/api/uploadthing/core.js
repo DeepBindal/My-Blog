@@ -2,12 +2,12 @@
 // Above resource shows how to setup uploadthing. Copy paste most of it as it is.
 // We're changing a few things in the middleware and configs of the file upload i.e., "media", "maxFileCount"
 
-import { currentUser } from "@clerk/nextjs";
+import { getCurrentUser } from '@/lib/actions/user.actions';
 import { createUploadthing, FileRouter } from "uploadthing/next";
 
 const f = createUploadthing();
 
-const getUser = async () => await currentUser();
+const getUser = await getCurrentUser();
 
 export const ourFileRouter = {
   // Define as many FileRoutes as you like, each with a unique routeSlug
